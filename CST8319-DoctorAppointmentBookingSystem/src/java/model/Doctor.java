@@ -5,7 +5,7 @@
 package model;
 
 /**
- *
+ * JavaBean for Doctor object.
  * @author fwu
  */
 public class Doctor {
