@@ -8,73 +8,14 @@ package model;
  * JavaBean for Doctor object.
  * @author fwu
  */
-public class Doctor {
-    private Integer doctorID;
-    private String doctorName;
-    private String doctorAddress;
-    private String doctorMobile;
-    private String doctorEmail;
-    private String doctorPwd;
+public class Doctor extends User {
 
-    public Doctor() {
+    public Doctor(int id, String name, String address, String mobile, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.mobile = mobile;
+        this.email = email;
+        this.password = password;
     }
-
-    public Doctor(Integer doctorID, String doctorName, String doctorAddress, String doctorMobile, String doctorEmail, String doctorPwd) {
-        this.doctorID = doctorID;
-        this.doctorName = doctorName;
-        this.doctorAddress = doctorAddress;
-        this.doctorMobile = doctorMobile;
-        this.doctorEmail = doctorEmail;
-        this.doctorPwd = doctorPwd;
-    }
-
-    public Integer getDoctorID() {
-        return doctorID;
-    }
-
-    public void setDoctorID(Integer doctorID) {
-        this.doctorID = doctorID;
-    }
-
-    public String getDoctorName() {
-        return doctorName;
-    }
-
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
-    }
-
-    public String getDoctorAddress() {
-        return doctorAddress;
-    }
-
-    public void setDoctorAddress(String doctorAddress) {
-        this.doctorAddress = doctorAddress;
-    }
-
-    public String getDoctorMobile() {
-        return doctorMobile;
-    }
-
-    public void setDoctorMobile(String doctorMobile) {
-        this.doctorMobile = doctorMobile;
-    }
-
-    public String getDoctorEmail() {
-        return doctorEmail;
-    }
-
-    public void setDoctorEmail(String doctorEmail) {
-        this.doctorEmail = doctorEmail;
-    }
-
-    public String getDoctorPwd() {
-        return doctorPwd;
-    }
-
-    public void setDoctorPwd(String doctorPwd) {
-        this.doctorPwd = doctorPwd;
-    }
-    
-    
 }
