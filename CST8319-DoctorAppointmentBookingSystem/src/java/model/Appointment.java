@@ -18,20 +18,18 @@ public class Appointment {
     private Date appointmentDate;
     private Time appointmentTime;
     private String reason;
-    private String treatment;
     private String note;
 
     public Appointment() {
     }
 
-    public Appointment(int appointmentID, int doctorID, int patientID, Date appointmentDate, Time appointmentTime, String reason, String treatment, String note) {
+    public Appointment(int appointmentID, int doctorID, int patientID, Date appointmentDate, Time appointmentTime, String reason, String note) {
         this.appointmentID = appointmentID;
         this.doctorID = doctorID;
         this.patientID = patientID;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.reason = reason;
-        this.treatment = treatment;
         this.note = note;
     }
 
@@ -81,14 +79,6 @@ public class Appointment {
 
     public void setReason(String reason) {
         this.reason = reason;
-    }
-
-    public String getTreatment() {
-        return treatment;
-    }
-
-    public void setTreatment(String treatment) {
-        this.treatment = treatment;
     }
 
     public String getNote() {
