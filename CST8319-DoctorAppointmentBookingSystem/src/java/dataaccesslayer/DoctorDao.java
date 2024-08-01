@@ -13,16 +13,19 @@ import model.Doctor;
  * @author fwu
  */
 public interface DoctorDao {
+    
+    // used for load all doctors
+    public List<Doctor> getAllDoctor();
 
     // used for registration, add object to database
     public void addDoctor(Doctor doctor);
 
     // used for validate doctor login
-    public Doctor validateDoctor(String email, String password);
+    public String getDoctorPasswordByEmail(String email);
     
     // achieve doctor detail by ID
     public Doctor getDoctorByID(int doctorID);
 
     // update doctor information
-    public void updateDoctor(Doctor doctor);
+    public Doctor updateDoctor(Integer id, String name, String address, String mobile, String email, String password);
 }

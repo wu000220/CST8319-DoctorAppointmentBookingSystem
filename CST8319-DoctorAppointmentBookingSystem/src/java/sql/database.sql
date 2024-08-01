@@ -43,7 +43,6 @@ CREATE TABLE Appointment (
     appointmentDate DATE NOT NULL,
     appointmentTime TIME NOT NULL,
     reason VARCHAR(255),
-    treatment VARCHAR(255),
     note TEXT,
     FOREIGN KEY (doctorID) REFERENCES Doctor(doctorID),
     FOREIGN KEY (patientID) REFERENCES Patient(patientID)
@@ -60,9 +59,9 @@ INSERT INTO Patient (patientName, patientAddress, patientMobile, patientEmail, p
 ('Bob Brown', '321 Pine St, Anycity', '555-765-4321', 'bob@example.com', 'password101');
 
 -- Insert sample data into Appointment table
-INSERT INTO Appointment (doctorID, patientID, appointmentDate, appointmentTime, reason, treatment, note) VALUES
-(1, 1, '2023-07-01', '09:00:00', 'Routine Checkup', 'General Examination', 'Patient in good health.'),
-(2, 2, '2023-07-02', '10:00:00', 'Consultation', 'Discussion about symptoms', 'Follow-up in one week.');
+INSERT INTO Appointment (doctorID, patientID, appointmentDate, appointmentTime, reason, note) VALUES
+(1, 1, '2023-07-01', '09:00:00', 'Routine Checkup', 'Patient in good health.'),
+(2, 2, '2023-07-02', '10:00:00', 'Consultation', 'Follow-up in one week.');
 
 -- Queries to ensure relationships and data
 SELECT * FROM Doctor;
