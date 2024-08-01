@@ -3,6 +3,11 @@
     Created on : Jul 31, 2024, 8:56:12 PM
     Author     : aaron
 --%>
+<%-- 
+    Document   : viewProfileDoctor
+    Created on : Jul 31, 2024, 8:56:12 PM
+    Author     : aaron
+--%>
 
 <%@ page import="model.Doctor" %>
 <%@ page import="dataaccesslayer.DoctorDao" %>
@@ -41,7 +46,7 @@
                 }
         %>
         
-        <form action="updateDoctorServlet" method="post">
+        <form action="UpdateDoctorServlet" method="post">
             <input type="hidden" name="doctorID" value="<%= doctor.getDoctorID() %>">
             <div class="form-group">
                 <label for="doctorName">Name:</label>
@@ -63,6 +68,10 @@
                 <label for="doctorPwd">Password:</label>
                 <input type="password" id="doctorPwd" name="doctorPwd" value="<%= doctor.getDoctorPwd() %>" required>
             </div>
+            <div class="form-group">
+                <label for="specialization">Specialization:</label>
+                <input type="text" id="specialization" name="specialization" value="<%= doctor.getSpecialization() %>">
+            </div>
             <button type="submit">Update Profile</button>
         </form>
 
@@ -79,4 +88,3 @@
     </div>
 </body>
 </html>
-

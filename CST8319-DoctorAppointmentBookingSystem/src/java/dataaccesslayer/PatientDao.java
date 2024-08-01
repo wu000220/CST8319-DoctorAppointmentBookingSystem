@@ -55,4 +55,17 @@ public class PatientDao {
 
         return patient;
     }
+
+    public void registerPatient(Patient patient) throws SQLException {
+        String query = "INSERT INTO Patient (patientName, patientAddress, patientMobile, patientEmail, patientPwd) VALUES (?, ?, ?, ?, ?)";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, patient.getPatientName());
+            statement.setString(2, patient.getPatientAddress());
+            statement.setString(3, patient.getPatientMobile());
+            statement.setString(4, patient.getPatientEmail());
+            statement.setString(5, patient.getPatientPwd());
+            statement.executeUpdate();
+        }
+    }
 }

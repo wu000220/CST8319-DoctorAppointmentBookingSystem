@@ -28,6 +28,7 @@ public class UpdateDoctorServlet extends HttpServlet {
         String mobile = request.getParameter("doctorMobile");
         String email = request.getParameter("doctorEmail");
         String password = request.getParameter("doctorPwd");
+        String specialization = request.getParameter("specialization");
 
         try {
             Doctor doctor = new Doctor();
@@ -37,13 +38,14 @@ public class UpdateDoctorServlet extends HttpServlet {
             doctor.setDoctorMobile(mobile);
             doctor.setDoctorEmail(email);
             doctor.setDoctorPwd(password);
+            doctor.setSpecialization(specialization);
             
             doctorDao.updateDoctor(doctor);
             response.sendRedirect("doctor.jsp"); // Redirect to doctor dashboard
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("updateError", "An error occurred while updating the profile.");
-            request.getRequestDispatcher("viewProfile.jsp").forward(request, response);
+            request.getRequestDispatcher("viewProfileDoctor.jsp").forward(request, response);
         }
     }
 }

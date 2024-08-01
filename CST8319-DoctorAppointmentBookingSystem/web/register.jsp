@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <h1>Register</h1>
-        <form action="registerServlet" method="post">
+        <form action="RegisterServlet" method="post">
             <div class="form-group">
                 <label for="role">Register as:</label>
                 <select id="role" name="role" required>

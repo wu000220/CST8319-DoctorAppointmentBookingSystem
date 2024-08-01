@@ -34,7 +34,7 @@
             }
         %>
 
-        <form action="updateProfilePatientServlet" method="post">
+        <form action="UpdateProfilePatientServlet" method="post">
             <div class="form-group">
                 <label for="patientName">Name:</label>
                 <input type="text" id="patientName" name="patientName" value="<%= patient.getPatientName() %>" required>

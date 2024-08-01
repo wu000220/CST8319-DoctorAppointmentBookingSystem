@@ -12,19 +12,19 @@ import java.util.List;
 public class DoctorDao {
 
     private Connection getConnection() throws SQLException {
-        return DataSource.getConnection();
+        return DataSource.getConnection(); // Ensure this method is correctly implemented
     }
 
     public Doctor getDoctorByID(int doctorID) {
         Doctor doctor = null;
         String sql = "SELECT * FROM Doctor WHERE doctorID = ?";
-        
+
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
+
             stmt.setInt(1, doctorID);
             ResultSet rs = stmt.executeQuery();
-            
+
             if (rs.next()) {
                 doctor = new Doctor();
                 doctor.setDoctorID(rs.getInt("doctorID"));
@@ -33,15 +33,17 @@ public class DoctorDao {
                 doctor.setDoctorMobile(rs.getString("doctorMobile"));
                 doctor.setDoctorEmail(rs.getString("doctorEmail"));
                 doctor.setDoctorPwd(rs.getString("doctorPwd"));
+                doctor.setSpecialization(rs.getString("specialization"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        
+
         return doctor;
     }
+
     public void updateDoctor(Doctor doctor) throws SQLException {
-        String sql = "UPDATE Doctor SET doctorName = ?, doctorAddress = ?, doctorMobile = ?, doctorEmail = ?, doctorPwd = ? WHERE doctorID = ?";
+        String sql = "UPDATE Doctor SET doctorName = ?, doctorAddress = ?, doctorMobile = ?, doctorEmail = ?, doctorPwd = ?, specialization = ? WHERE doctorID = ?";
 
         try (Connection conn = getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -51,11 +53,13 @@ public class DoctorDao {
             stmt.setString(3, doctor.getDoctorMobile());
             stmt.setString(4, doctor.getDoctorEmail());
             stmt.setString(5, doctor.getDoctorPwd());
-            stmt.setInt(6, doctor.getDoctorID());
+            stmt.setString(6, doctor.getSpecialization());
+            stmt.setInt(7, doctor.getDoctorID());
 
             stmt.executeUpdate();
         }
     }
+
     public List<Doctor> getAllDoctors() {
         List<Doctor> doctors = new ArrayList<>();
         String sql = "SELECT doctorID, doctorName, specialization FROM Doctor";
@@ -77,5 +81,18 @@ public class DoctorDao {
 
         return doctors;
     }
-    
+
+    public void registerDoctor(Doctor doctor) throws SQLException {
+        String query = "INSERT INTO Doctor (doctorName, doctorAddress, doctorMobile, doctorEmail, doctorPwd, specialization) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, doctor.getDoctorName());
+            statement.setString(2, doctor.getDoctorAddress());
+            statement.setString(3, doctor.getDoctorMobile());
+            statement.setString(4, doctor.getDoctorEmail());
+            statement.setString(5, doctor.getDoctorPwd());
+            statement.setString(6, doctor.getSpecialization());
+            statement.executeUpdate();
+        }
+    }
 }
