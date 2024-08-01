@@ -9,6 +9,7 @@ package model;
  * @author fwu
  */
 public class Patient {
+
     private Integer id;
     private String name;
     private String address;
