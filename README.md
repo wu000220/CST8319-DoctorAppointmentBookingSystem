@@ -1,4 +1,4 @@
-Doctor Appointment Booking System       
+                                    Doctor Appointment Booking System       
 
 Overview   
 The Doctor Appointment Booking System is a web-based application designed to simplify scheduling doctor appointments. It provides an automated, user-friendly interface for patients to book, reschedule, and cancel appointments.
