@@ -4,13 +4,9 @@
  */
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 import java.sql.Time;
 
-/**
- *
- * @author fwu
- */
 public class Appointment {
     private int appointmentID;
     private int doctorID;
@@ -18,23 +14,11 @@ public class Appointment {
     private Date appointmentDate;
     private Time appointmentTime;
     private String reason;
-    private String treatment;
     private String note;
+    private String patientName;
+    private String doctorName; 
 
-    public Appointment() {
-    }
-
-    public Appointment(int appointmentID, int doctorID, int patientID, Date appointmentDate, Time appointmentTime, String reason, String treatment, String note) {
-        this.appointmentID = appointmentID;
-        this.doctorID = doctorID;
-        this.patientID = patientID;
-        this.appointmentDate = appointmentDate;
-        this.appointmentTime = appointmentTime;
-        this.reason = reason;
-        this.treatment = treatment;
-        this.note = note;
-    }
-
+    // Getters and Setters
     public int getAppointmentID() {
         return appointmentID;
     }
@@ -83,14 +67,6 @@ public class Appointment {
         this.reason = reason;
     }
 
-    public String getTreatment() {
-        return treatment;
-    }
-
-    public void setTreatment(String treatment) {
-        this.treatment = treatment;
-    }
-
     public String getNote() {
         return note;
     }
@@ -98,6 +74,19 @@ public class Appointment {
     public void setNote(String note) {
         this.note = note;
     }
-    
-    
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
 }
