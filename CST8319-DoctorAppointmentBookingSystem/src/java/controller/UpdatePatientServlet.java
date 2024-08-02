@@ -4,22 +4,23 @@
  */
 package controller;
 
-import java.io.IOException;
+import businesslayer.PatientBusinessLogic;
+import model.Patient;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import dataaccesslayer.PatientDao;
-import model.Patient;
+import java.io.IOException;
 
 @WebServlet("/UpdateProfilePatientServlet")
 public class UpdatePatientServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private PatientDao patientDao = new PatientDao();
 
+    private PatientBusinessLogic patientBusinessLogic = new PatientBusinessLogic();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
@@ -35,19 +36,35 @@ public class UpdatePatientServlet extends HttpServlet {
         String address = request.getParameter("address");
         String password = request.getParameter("password");
 
-        patient.setPatientName(patientName);
-        patient.setPatientEmail(email);
-        patient.setPatientMobile(phoneNumber);
-        patient.setPatientAddress(address);
-        patient.setPatientPwd(password);
-
         try {
-            patientDao.updatePatient(patient);
+            // Use the business logic class to update the patient's profile
+            patientBusinessLogic.updatePatient(
+                patient.getPatientID(), 
+                patientName, 
+                email, 
+                phoneNumber, 
+                address, 
+                password
+            );
+
+            // Update the session with the new patient details
+            patient.setPatientName(patientName);
+            patient.setPatientEmail(email);
+            patient.setPatientMobile(phoneNumber);
+            patient.setPatientAddress(address);
+            patient.setPatientPwd(password);
             session.setAttribute("patient", patient);
+
             response.sendRedirect("patient.jsp");
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
+            // Handle validation errors
             e.printStackTrace();
-            request.setAttribute("updateError", "Error updating profile.");
+            request.setAttribute("updateError", "Error updating profile: " + e.getMessage());
+            request.getRequestDispatcher("viewProfilePatient.jsp").forward(request, response);
+        } catch (Exception e) {
+            // Handle other exceptions
+            e.printStackTrace();
+            request.setAttribute("updateError", "An error occurred while updating the profile.");
             request.getRequestDispatcher("viewProfilePatient.jsp").forward(request, response);
         }
     }

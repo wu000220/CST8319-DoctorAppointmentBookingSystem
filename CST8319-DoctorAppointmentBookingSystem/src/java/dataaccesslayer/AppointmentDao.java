@@ -9,11 +9,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentDao {
+public class AppointmentDao implements AppointmentDaoInterface{
     private Connection getConnection() throws SQLException {
         return DataSource.getConnection();
     }
 
+    @Override
     public List<Appointment> getUpcomingAppointmentsByDoctorID(int doctorID) {
         List<Appointment> appointments = new ArrayList<>();
         String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, p.patientName " +
@@ -45,6 +46,7 @@ public class AppointmentDao {
         return appointments;
     }
 
+    @Override
     public List<Appointment> getPastAppointmentsByDoctorID(int doctorID) {
         List<Appointment> appointments = new ArrayList<>();
         String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, p.patientName " +
@@ -76,6 +78,7 @@ public class AppointmentDao {
         return appointments;
     }
 
+    @Override
     public void addNoteToAppointment(int appointmentID, String note) throws SQLException {
         String sql = "UPDATE Appointment SET note = ? WHERE appointmentID = ?";
 
@@ -88,6 +91,7 @@ public class AppointmentDao {
         }
     }
 
+    @Override
     public List<Appointment> getUpcomingAppointmentsByPatientID(int patientID) throws SQLException {
         List<Appointment> appointments = new ArrayList<>();
         String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName " +
@@ -116,6 +120,7 @@ public class AppointmentDao {
         return appointments;
     }
 
+    @Override
     public List<Appointment> getPastAppointmentsByPatientID(int patientID) {
         List<Appointment> appointments = new ArrayList<>();
         String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName " +
@@ -147,6 +152,7 @@ public class AppointmentDao {
         return appointments;
     }
 
+    @Override
     public Appointment getAppointmentByID(int appointmentID) throws SQLException {
         Appointment appointment = null;
         String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName, p.patientName " +
@@ -175,6 +181,7 @@ public class AppointmentDao {
         return appointment;
     }
 
+    @Override
     public void updateAppointment(Appointment appointment) throws SQLException {
         String sql = "UPDATE Appointment SET appointmentDate = ?, appointmentTime = ?, reason = ? WHERE appointmentID = ?";
 
@@ -190,6 +197,7 @@ public class AppointmentDao {
         }
     }
     
+    @Override
     public void bookAppointment(Appointment appointment) throws SQLException {
         String sql = "INSERT INTO Appointment (doctorID, patientID, appointmentDate, appointmentTime, reason) VALUES (?, ?, ?, ?, ?)";
 
@@ -204,6 +212,7 @@ public class AppointmentDao {
             stmt.executeUpdate();
         }
     }
+    @Override
     public void deleteAppointment(int appointmentID) throws SQLException {
         String sql = "DELETE FROM Appointment WHERE appointmentID = ?";
 

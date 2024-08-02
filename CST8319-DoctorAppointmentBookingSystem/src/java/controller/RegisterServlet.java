@@ -4,24 +4,24 @@
  */
 package controller;
 
-import java.io.IOException;
+import businesslayer.DoctorBusinessLogic;
+import businesslayer.PatientBusinessLogic;
+import model.Doctor;
+import model.Patient;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import dataaccesslayer.DoctorDao;
-import dataaccesslayer.PatientDao;
-import model.Doctor;
-import model.Patient;
+import java.io.IOException;
 
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private DoctorDao doctorDao = new DoctorDao();
-    private PatientDao patientDao = new PatientDao();
+    private DoctorBusinessLogic doctorBusinessLogic = new DoctorBusinessLogic();
+    private PatientBusinessLogic patientBusinessLogic = new PatientBusinessLogic();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,6 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             if (role.equals("doctor")) {
-                // Handle doctor registration
                 Doctor doctor = new Doctor();
                 doctor.setDoctorName(name);
                 doctor.setDoctorEmail(email);
@@ -43,9 +42,8 @@ public class RegisterServlet extends HttpServlet {
                 doctor.setDoctorMobile(mobile);
                 doctor.setSpecialization(""); // Default specialization
 
-                doctorDao.registerDoctor(doctor);
+                doctorBusinessLogic.registerDoctor(doctor);
             } else if (role.equals("patient")) {
-                // Handle patient registration
                 Patient patient = new Patient();
                 patient.setPatientName(name);
                 patient.setPatientEmail(email);
@@ -53,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
                 patient.setPatientAddress(address);
                 patient.setPatientMobile(mobile);
 
-                patientDao.registerPatient(patient);
+                patientBusinessLogic.registerPatient(patient);
             }
             response.sendRedirect("index.jsp"); // Redirect to login page after successful registration
         } catch (Exception e) {

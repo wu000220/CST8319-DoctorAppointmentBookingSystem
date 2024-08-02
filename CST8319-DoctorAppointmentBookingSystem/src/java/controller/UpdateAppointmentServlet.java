@@ -4,9 +4,7 @@
  */
 package controller;
 
-import dataaccesslayer.AppointmentDao;
-import model.Appointment;
-
+import businesslayer.AppointmentBusinessLogic;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
@@ -20,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 public class UpdateAppointmentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private AppointmentBusinessLogic appointmentBusinessLogic = new AppointmentBusinessLogic();
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int appointmentID = Integer.parseInt(request.getParameter("appointmentID"));
@@ -27,20 +28,17 @@ public class UpdateAppointmentServlet extends HttpServlet {
             Time appointmentTime = Time.valueOf(request.getParameter("appointmentTime"));
             String reason = request.getParameter("reason");
 
-            AppointmentDao appointmentDao = new AppointmentDao();
-            Appointment appointment = appointmentDao.getAppointmentByID(appointmentID);
+            // Use the business logic class to update the appointment
+            appointmentBusinessLogic.updateAppointment(appointmentID, appointmentDate, appointmentTime, reason);
 
-            if (appointment != null) {
-                appointment.setAppointmentDate(appointmentDate);
-                appointment.setAppointmentTime(appointmentTime);
-                appointment.setReason(reason);
-
-                appointmentDao.updateAppointment(appointment);
-                response.sendRedirect("patient.jsp"); // Redirect to patient page after update
-            } else {
-                throw new Exception("Appointment not found");
-            }
+            response.sendRedirect("patient.jsp"); // Redirect to patient page after update
+        } catch (IllegalArgumentException e) {
+            // Handle case where input is invalid or appointment is not found
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Error updating appointment: " + e.getMessage());
+            request.getRequestDispatcher("editAppointment.jsp").forward(request, response);
         } catch (Exception e) {
+            // Handle other exceptions
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error updating appointment: " + e.getMessage());
             request.getRequestDispatcher("editAppointment.jsp").forward(request, response);

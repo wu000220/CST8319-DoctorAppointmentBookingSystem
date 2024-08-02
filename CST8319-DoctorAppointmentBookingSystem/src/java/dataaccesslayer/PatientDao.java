@@ -10,11 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PatientDao {
+public class PatientDao implements PatientDaoInterface{
     private Connection getConnection() throws SQLException {
         return DataSource.getConnection();
     }
 
+    @Override
     public void updatePatient(Patient patient) throws SQLException {
         String sql = "UPDATE Patient SET patientName = ?, patientAddress = ?, patientMobile = ?, patientEmail = ?, patientPwd = ? WHERE patientID = ?";
 
@@ -32,6 +33,7 @@ public class PatientDao {
         }
     }
 
+    @Override
     public Patient getPatientByID(int patientID) throws SQLException {
         String sql = "SELECT * FROM Patient WHERE patientID = ?";
         Patient patient = null;
@@ -56,6 +58,7 @@ public class PatientDao {
         return patient;
     }
 
+    @Override
     public void registerPatient(Patient patient) throws SQLException {
         String query = "INSERT INTO Patient (patientName, patientAddress, patientMobile, patientEmail, patientPwd) VALUES (?, ?, ?, ?, ?)";
         try (Connection connection = getConnection();
