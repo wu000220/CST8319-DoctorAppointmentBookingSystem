@@ -60,3 +60,4 @@ INSERT INTO Appointment (doctorID, patientID, appointmentDate, appointmentTime, 
 (1, 1, '2025-07-01', '09:00:00', 'Routine Checkup', 'Patient in good health.'),
 (2, 2, '2025-07-02', '10:00:00', 'Consultation', 'Follow-up in one week.'),
 (2, 2, '2023-07-02', '10:00:00', 'Consultation', 'Follow-up in one week.');
+

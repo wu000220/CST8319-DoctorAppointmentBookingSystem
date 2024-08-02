@@ -11,6 +11,7 @@ import java.util.List;
 
 public class DoctorDao implements DoctorDaoInterface{
 
+
     private Connection getConnection() throws SQLException {
         return DataSource.getConnection(); // Ensure this method is correctly implemented
     }
@@ -71,6 +72,7 @@ public class DoctorDao implements DoctorDaoInterface{
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
+
             while (rs.next()) {
                 Doctor doctor = new Doctor();
                 doctor.setDoctorID(rs.getInt("doctorID"));
@@ -81,6 +83,7 @@ public class DoctorDao implements DoctorDaoInterface{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
         return doctors;
     }
@@ -99,4 +102,6 @@ public class DoctorDao implements DoctorDaoInterface{
             statement.executeUpdate();
         }
     }
+
+
 }
