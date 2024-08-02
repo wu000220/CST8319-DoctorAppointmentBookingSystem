@@ -4,65 +4,62 @@
  */
 package model;
 
-/**
- *
- * @author fwu
- */
 public class Patient {
 
-    private Integer id;
-    private String name;
-    private String address;
-    private String mobile;
-    private String email;
-    private String password;
+    private int patientID;
+    private String patientName;
+    private String patientAddress;
+    private String patientMobile;
+    private String patientEmail;
+    private String patientPwd;
 
-    public Integer getId() {
-        return id;
+    // Getters and Setters
+    public int getPatientID() {
+        return patientID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPatientID(int patientID) {
+        this.patientID = patientID;
     }
 
-    public String getName() {
-        return name;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getPatientAddress() {
+        return patientAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setPatientAddress(String patientAddress) {
+        this.patientAddress = patientAddress;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getPatientMobile() {
+        return patientMobile;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setPatientMobile(String patientMobile) {
+        this.patientMobile = patientMobile;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPatientEmail() {
+        return patientEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPatientEmail(String patientEmail) {
+        this.patientEmail = patientEmail;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPatientPwd() {
+        return patientPwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPatientPwd(String patientPwd) {
+        this.patientPwd = patientPwd;
     }
-    
 }
+

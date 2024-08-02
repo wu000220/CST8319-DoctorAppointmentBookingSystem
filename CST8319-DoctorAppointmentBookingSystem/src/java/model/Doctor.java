@@ -4,66 +4,73 @@
  */
 package model;
 
-/**
- * JavaBean for Doctor object.
- * @author fwu
- */
 public class Doctor {
 
-    private Integer id;
-    private String name;
-    private String address;
-    private String mobile;
-    private String email;
-    private String password;
+    private int doctorID;
+    private String doctorName;
+    private String doctorAddress;
+    private String doctorMobile;
+    private String doctorEmail;
+    private String doctorPwd;
+    private String specialization;
 
-    public Integer getId() {
-        return id;
+    // Getters and Setters
+    public int getDoctorID() {
+        return doctorID;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDoctorID(int doctorID) {
+        this.doctorID = doctorID;
     }
 
-    public String getName() {
-        return name;
+    public String getDoctorName() {
+        return doctorName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDoctorAddress() {
+        return doctorAddress;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDoctorAddress(String doctorAddress) {
+        this.doctorAddress = doctorAddress;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getDoctorMobile() {
+        return doctorMobile;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setDoctorMobile(String doctorMobile) {
+        this.doctorMobile = doctorMobile;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDoctorEmail() {
+        return doctorEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDoctorEmail(String doctorEmail) {
+        this.doctorEmail = doctorEmail;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDoctorPwd() {
+        return doctorPwd;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDoctorPwd(String doctorPwd) {
+        this.doctorPwd = doctorPwd;
     }
-    
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+
+
+    }
     
 }
