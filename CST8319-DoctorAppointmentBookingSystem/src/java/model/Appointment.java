@@ -18,7 +18,9 @@ public class Appointment {
     private String patientName;
     private String doctorName; 
 
+
     // Getters and Setters
+
     public int getAppointmentID() {
         return appointmentID;
     }

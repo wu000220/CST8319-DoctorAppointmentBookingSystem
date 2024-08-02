@@ -5,6 +5,7 @@
 package model;
 
 public class Doctor {
+
     private int doctorID;
     private String doctorName;
     private String doctorAddress;
@@ -68,6 +69,8 @@ public class Doctor {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+
+
     }
     
 }

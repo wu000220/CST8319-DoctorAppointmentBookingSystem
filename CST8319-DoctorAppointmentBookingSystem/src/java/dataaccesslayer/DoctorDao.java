@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DoctorDao {
 
     private Connection getConnection() throws SQLException {
@@ -68,6 +69,7 @@ public class DoctorDao {
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
+
             while (rs.next()) {
                 Doctor doctor = new Doctor();
                 doctor.setDoctorID(rs.getInt("doctorID"));
@@ -78,6 +80,7 @@ public class DoctorDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
         return doctors;
     }
@@ -95,4 +98,6 @@ public class DoctorDao {
             statement.executeUpdate();
         }
     }
+
+
 }

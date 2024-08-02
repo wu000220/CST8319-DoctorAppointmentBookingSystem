@@ -5,6 +5,7 @@
 package model;
 
 public class Patient {
+
     private int patientID;
     private String patientName;
     private String patientAddress;
@@ -61,3 +62,4 @@ public class Patient {
         this.patientPwd = patientPwd;
     }
 }
+
