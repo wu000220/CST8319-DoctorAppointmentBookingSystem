@@ -9,13 +9,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+public class DoctorDao implements DoctorDaoInterface{
 
-public class DoctorDao {
 
     private Connection getConnection() throws SQLException {
         return DataSource.getConnection(); // Ensure this method is correctly implemented
     }
 
+    @Override
     public Doctor getDoctorByID(int doctorID) {
         Doctor doctor = null;
         String sql = "SELECT * FROM Doctor WHERE doctorID = ?";
@@ -43,6 +44,7 @@ public class DoctorDao {
         return doctor;
     }
 
+    @Override
     public void updateDoctor(Doctor doctor) throws SQLException {
         String sql = "UPDATE Doctor SET doctorName = ?, doctorAddress = ?, doctorMobile = ?, doctorEmail = ?, doctorPwd = ?, specialization = ? WHERE doctorID = ?";
 
@@ -61,6 +63,7 @@ public class DoctorDao {
         }
     }
 
+    @Override
     public List<Doctor> getAllDoctors() {
         List<Doctor> doctors = new ArrayList<>();
         String sql = "SELECT doctorID, doctorName, specialization FROM Doctor";
@@ -85,6 +88,7 @@ public class DoctorDao {
         return doctors;
     }
 
+    @Override
     public void registerDoctor(Doctor doctor) throws SQLException {
         String query = "INSERT INTO Doctor (doctorName, doctorAddress, doctorMobile, doctorEmail, doctorPwd, specialization) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection connection = getConnection();

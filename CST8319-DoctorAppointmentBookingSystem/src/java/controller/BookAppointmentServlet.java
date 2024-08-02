@@ -4,21 +4,24 @@
  */
 package controller;
 
-import dataaccesslayer.AppointmentDao;
-import model.Appointment;
-import java.io.IOException;
-import java.sql.Date;
-import java.sql.Time;
+import businesslayer.AppointmentBusinessLogic;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.SQLException;
 
 @WebServlet("/BookAppointmentServlet")
 public class BookAppointmentServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
+    private AppointmentBusinessLogic appointmentBusinessLogic = new AppointmentBusinessLogic();
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int doctorID = Integer.parseInt(request.getParameter("doctorID"));
@@ -27,20 +30,19 @@ public class BookAppointmentServlet extends HttpServlet {
             Time appointmentTime = Time.valueOf(request.getParameter("appointmentTime") + ":00");
             String reason = request.getParameter("reason");
 
-            AppointmentDao appointmentDao = new AppointmentDao();
-            Appointment appointment = new Appointment();
-            appointment.setDoctorID(doctorID);
-            appointment.setPatientID(patientID);
-            appointment.setAppointmentDate(appointmentDate);
-            appointment.setAppointmentTime(appointmentTime);
-            appointment.setReason(reason);
-
-            appointmentDao.bookAppointment(appointment); // Method to insert appointment into database
-
+            appointmentBusinessLogic.bookAppointment(doctorID, patientID, appointmentDate, appointmentTime, reason);
             response.sendRedirect("patient.jsp"); // Redirect to patient dashboard
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("bookTheDoctor.jsp").forward(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Database error while booking appointment");
+            request.getRequestDispatcher("bookTheDoctor.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("errorMessage", "Error booking appointment: " + e.getMessage());
+            request.setAttribute("errorMessage", "Unexpected error occurred");
             request.getRequestDispatcher("bookTheDoctor.jsp").forward(request, response);
         }
     }
