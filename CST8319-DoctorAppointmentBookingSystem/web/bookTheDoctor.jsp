@@ -19,6 +19,13 @@
 <body>
     <div class="container">
         <h1>Book an Appointment with Doctor</h1>
+        <div class="buttons">
+            <a href="viewProfilePatient.jsp" class="button">View Profile</a>
+            
+            <a href="patient.jsp" class="button">Back to Dashboard</a>
+            <a href="LogoutServlet" class="button">Logout</a>
+            
+        </div>
 
         <% 
             // Retrieve the doctor ID from the request
