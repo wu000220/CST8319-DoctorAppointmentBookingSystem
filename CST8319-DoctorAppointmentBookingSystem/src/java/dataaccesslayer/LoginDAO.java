@@ -12,9 +12,12 @@ import java.sql.SQLException;
 import model.Doctor;
 import model.Patient;
 
+/**
+ * Provides methods for authenticating doctors and patients.
+ */
 public class LoginDAO {
 
-    // Authenticate Doctor
+    // Authenticates a doctor based on their email and password.
     public Doctor authenticateDoctor(String email, String password) throws SQLException {
         Connection connection = DataSource.getConnection();
         String query = "SELECT * FROM Doctor WHERE doctorEmail = ? AND doctorPwd = ?";
@@ -36,7 +39,7 @@ public class LoginDAO {
         return null;
     }
 
-    // Authenticate Patient
+    // Authenticates a patient based on their email and password.
     public Patient authenticatePatient(String email, String password) throws SQLException {
         Connection connection = DataSource.getConnection();
         String query = "SELECT * FROM Patient WHERE patientEmail = ? AND patientPwd = ?";

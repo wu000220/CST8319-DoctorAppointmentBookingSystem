@@ -9,22 +9,28 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentDao implements AppointmentDaoInterface{
+/**
+ * The AppointmentDao class implements the AppointmentDaoInterface and provides
+ * methods to interact with the database for Appointment-related operations.
+ */
+public class AppointmentDao implements AppointmentDaoInterface {
+
+    // Establishes and returns a connection to the database.
     private Connection getConnection() throws SQLException {
         return DataSource.getConnection();
     }
 
+    // Retrieves a list of upcoming appointments for a specific doctor.
     @Override
     public List<Appointment> getUpcomingAppointmentsByDoctorID(int doctorID) {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, p.patientName " +
-                     "FROM Appointment a " +
-                     "JOIN Patient p ON a.patientID = p.patientID " +
-                     "WHERE a.doctorID = ? AND a.appointmentDate >= CURDATE() " +
-                     "ORDER BY a.appointmentDate, a.appointmentTime";
+        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, p.patientName "
+                + "FROM Appointment a "
+                + "JOIN Patient p ON a.patientID = p.patientID "
+                + "WHERE a.doctorID = ? AND a.appointmentDate >= CURDATE() "
+                + "ORDER BY a.appointmentDate, a.appointmentTime";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, doctorID);
             ResultSet rs = stmt.executeQuery();
@@ -46,17 +52,17 @@ public class AppointmentDao implements AppointmentDaoInterface{
         return appointments;
     }
 
+    // Retrieves a list of past appointments for a specific doctor.
     @Override
     public List<Appointment> getPastAppointmentsByDoctorID(int doctorID) {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, p.patientName " +
-                     "FROM Appointment a " +
-                     "JOIN Patient p ON a.patientID = p.patientID " +
-                     "WHERE a.doctorID = ? AND a.appointmentDate < CURDATE() " +
-                     "ORDER BY a.appointmentDate DESC, a.appointmentTime DESC";
+        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, p.patientName "
+                + "FROM Appointment a "
+                + "JOIN Patient p ON a.patientID = p.patientID "
+                + "WHERE a.doctorID = ? AND a.appointmentDate < CURDATE() "
+                + "ORDER BY a.appointmentDate DESC, a.appointmentTime DESC";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, doctorID);
             ResultSet rs = stmt.executeQuery();
@@ -78,12 +84,12 @@ public class AppointmentDao implements AppointmentDaoInterface{
         return appointments;
     }
 
+    // Adds a note to a specific appointment.
     @Override
     public void addNoteToAppointment(int appointmentID, String note) throws SQLException {
         String sql = "UPDATE Appointment SET note = ? WHERE appointmentID = ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, note);
             stmt.setInt(2, appointmentID);
@@ -91,17 +97,17 @@ public class AppointmentDao implements AppointmentDaoInterface{
         }
     }
 
+    // Retrieves a list of upcoming appointments for a specific patient.
     @Override
     public List<Appointment> getUpcomingAppointmentsByPatientID(int patientID) throws SQLException {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName " +
-                     "FROM Appointment a " +
-                     "JOIN Doctor d ON a.doctorID = d.doctorID " +
-                     "WHERE a.patientID = ? AND a.appointmentDate >= CURDATE() " +
-                     "ORDER BY a.appointmentDate, a.appointmentTime";
+        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName "
+                + "FROM Appointment a "
+                + "JOIN Doctor d ON a.doctorID = d.doctorID "
+                + "WHERE a.patientID = ? AND a.appointmentDate >= CURDATE() "
+                + "ORDER BY a.appointmentDate, a.appointmentTime";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, patientID);
             ResultSet rs = stmt.executeQuery();
@@ -120,17 +126,17 @@ public class AppointmentDao implements AppointmentDaoInterface{
         return appointments;
     }
 
+    // Retrieves a list of past appointments for a specific patient.
     @Override
     public List<Appointment> getPastAppointmentsByPatientID(int patientID) {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName " +
-                     "FROM Appointment a " +
-                     "JOIN Doctor d ON a.doctorID = d.doctorID " +
-                     "WHERE a.patientID = ? AND a.appointmentDate < CURDATE() " +
-                     "ORDER BY a.appointmentDate DESC";
+        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName "
+                + "FROM Appointment a "
+                + "JOIN Doctor d ON a.doctorID = d.doctorID "
+                + "WHERE a.patientID = ? AND a.appointmentDate < CURDATE() "
+                + "ORDER BY a.appointmentDate DESC";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, patientID);
             ResultSet rs = stmt.executeQuery();
@@ -152,17 +158,17 @@ public class AppointmentDao implements AppointmentDaoInterface{
         return appointments;
     }
 
+    // Retrieves a specific appointment by its ID.
     @Override
     public Appointment getAppointmentByID(int appointmentID) throws SQLException {
         Appointment appointment = null;
-        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName, p.patientName " +
-                     "FROM Appointment a " +
-                     "JOIN Doctor d ON a.doctorID = d.doctorID " +
-                     "JOIN Patient p ON a.patientID = p.patientID " +
-                     "WHERE a.appointmentID = ?";
+        String sql = "SELECT a.appointmentID, a.appointmentDate, a.appointmentTime, a.reason, a.note, d.doctorName, p.patientName "
+                + "FROM Appointment a "
+                + "JOIN Doctor d ON a.doctorID = d.doctorID "
+                + "JOIN Patient p ON a.patientID = p.patientID "
+                + "WHERE a.appointmentID = ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, appointmentID);
             ResultSet rs = stmt.executeQuery();
@@ -181,12 +187,12 @@ public class AppointmentDao implements AppointmentDaoInterface{
         return appointment;
     }
 
+    // Updates the details of a specific appointment.
     @Override
     public void updateAppointment(Appointment appointment) throws SQLException {
         String sql = "UPDATE Appointment SET appointmentDate = ?, appointmentTime = ?, reason = ? WHERE appointmentID = ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setDate(1, new java.sql.Date(appointment.getAppointmentDate().getTime()));
             stmt.setTime(2, new java.sql.Time(appointment.getAppointmentTime().getTime()));
@@ -196,13 +202,13 @@ public class AppointmentDao implements AppointmentDaoInterface{
             stmt.executeUpdate();
         }
     }
-    
+
+    // Books a new appointment.
     @Override
     public void bookAppointment(Appointment appointment) throws SQLException {
         String sql = "INSERT INTO Appointment (doctorID, patientID, appointmentDate, appointmentTime, reason) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, appointment.getDoctorID());
             stmt.setInt(2, appointment.getPatientID());
@@ -212,16 +218,17 @@ public class AppointmentDao implements AppointmentDaoInterface{
             stmt.executeUpdate();
         }
     }
+
+    // Deletes a specific appointment by its ID.
     @Override
     public void deleteAppointment(int appointmentID) throws SQLException {
         String sql = "DELETE FROM Appointment WHERE appointmentID = ?";
 
-        try (Connection conn = getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, appointmentID);
             stmt.executeUpdate();
         }
-}
+    }
 
 }

@@ -6,6 +6,7 @@ package controller;
 
 import businesslayer.DoctorBusinessLogic;
 import businesslayer.PatientBusinessLogic;
+import businesslayer.Validation;
 import model.Doctor;
 import model.Patient;
 
@@ -22,6 +23,7 @@ public class RegisterServlet extends HttpServlet {
 
     private DoctorBusinessLogic doctorBusinessLogic = new DoctorBusinessLogic();
     private PatientBusinessLogic patientBusinessLogic = new PatientBusinessLogic();
+    private Validation validation = new Validation();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,6 +35,9 @@ public class RegisterServlet extends HttpServlet {
         String mobile = request.getParameter("mobile");
 
         try {
+            // Validate password
+            validation.validatePasswordImpl(password);
+            
             if (role.equals("doctor")) {
                 Doctor doctor = new Doctor();
                 doctor.setDoctorName(name);

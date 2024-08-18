@@ -4,6 +4,11 @@
  */
 package model;
 
+/**
+ * The Patient class represents a patient in the system.
+ * It contains details about the patient such as their name, contact information,
+ * and account credentials.
+ */
 public class Patient {
 
     private int patientID;

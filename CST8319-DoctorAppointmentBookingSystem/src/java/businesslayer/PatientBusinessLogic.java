@@ -9,22 +9,26 @@ import dataaccesslayer.PatientDao;
 import model.Patient;
 import java.sql.SQLException;
 
+/**
+ * Handles business logic related to patient operations.
+ */
 public class PatientBusinessLogic {
 
     private PatientDao patientDao = new PatientDao();
 
+    // Validates the details of a patient.
     public boolean validatePatient(Patient patient) {
-        // Example validation logic
+
         if (patient.getPatientName() == null || patient.getPatientName().isEmpty()) {
             return false; // Name is required
         }
         if (patient.getPatientEmail() == null || !patient.getPatientEmail().contains("@")) {
             return false; // Email must be valid
         }
-        // Add more validations as needed
         return true;
     }
 
+    // Registers a new patient if the patient details are valid.
     public void registerPatient(Patient patient) throws SQLException {
         if (validatePatient(patient)) {
             patientDao.registerPatient(patient);
@@ -33,6 +37,7 @@ public class PatientBusinessLogic {
         }
     }
 
+    // Updates an existing patient's information if the details are valid.
     public void updatePatient(Patient patient) throws SQLException {
         if (validatePatient(patient)) {
             patientDao.updatePatient(patient);
@@ -41,9 +46,12 @@ public class PatientBusinessLogic {
         }
     }
 
+    // Retrieves a patient's information by their ID.
     public Patient getPatientByID(int patientID) throws SQLException {
         return patientDao.getPatientByID(patientID);
     }
+    
+    // Updates a patient's profile using individual fields.
     public void updatePatient(int patientID, String name, String email, String phoneNumber, String address, String password) throws SQLException {
         // Validate input fields
         validatePatientDetails(name, email, phoneNumber, address, password);
@@ -61,6 +69,7 @@ public class PatientBusinessLogic {
         patientDao.updatePatient(patient);
     }
 
+    // Validates individual patient details.
     private void validatePatientDetails(String name, String email, String phoneNumber, String address, String password) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");

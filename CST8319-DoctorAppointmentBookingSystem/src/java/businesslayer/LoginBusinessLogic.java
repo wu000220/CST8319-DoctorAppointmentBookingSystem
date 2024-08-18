@@ -8,11 +8,14 @@ import dataaccesslayer.LoginDAO;
 import model.Doctor;
 import model.Patient;
 
+/**
+ * Handles business logic related to user authentication.
+ */
 public class LoginBusinessLogic {
 
     private LoginDAO loginDAO = new LoginDAO();
 
-    // Method to authenticate a doctor
+    // Authenticates a doctor with the provided email and password.
     public Doctor authenticateDoctor(String email, String password) throws Exception {
         if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             throw new IllegalArgumentException("Email and password must not be empty");
@@ -21,7 +24,7 @@ public class LoginBusinessLogic {
         return loginDAO.authenticateDoctor(email, password);
     }
 
-    // Method to authenticate a patient
+    // Authenticates a patient with the provided email and password.
     public Patient authenticatePatient(String email, String password) throws Exception {
         if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             throw new IllegalArgumentException("Email and password must not be empty");
