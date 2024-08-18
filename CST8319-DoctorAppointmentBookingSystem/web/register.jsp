@@ -16,6 +16,20 @@
 <body>
     <div class="container">
         <h1>Register</h1>
+        
+        <!-- Display error message if it exists -->
+        <% 
+            String errorMessage = (String) request.getAttribute("registerError");
+            if (errorMessage != null) { 
+        %>
+            <div class="error-message">
+                <%= errorMessage %>
+            </div>
+        <% 
+            } 
+        %>
+        <br>
+
         <form action="RegisterServlet" method="post">
             <div class="form-group">
                 <label for="role">Register as:</label>
