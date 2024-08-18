@@ -7,6 +7,11 @@ package model;
 import java.sql.Date;
 import java.sql.Time;
 
+/**
+ * The Appointment class represents a medical appointment.
+ * It contains details about the appointment such as the doctor, patient, 
+ * date, time, reason for the visit, and any additional notes.
+ */
 public class Appointment {
     private int appointmentID;
     private int doctorID;

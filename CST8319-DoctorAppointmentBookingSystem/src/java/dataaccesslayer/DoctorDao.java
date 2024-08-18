@@ -9,13 +9,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The DoctorDao class implements the DoctorDaoInterface and provides
+ * methods to interact with the database for Doctor-related operations.
+ */
 public class DoctorDao implements DoctorDaoInterface{
 
-
+    // Establishes a connection to the database.
     private Connection getConnection() throws SQLException {
         return DataSource.getConnection(); // Ensure this method is correctly implemented
     }
 
+    // Retrieves a doctor by their ID.
     @Override
     public Doctor getDoctorByID(int doctorID) {
         Doctor doctor = null;
@@ -44,6 +49,7 @@ public class DoctorDao implements DoctorDaoInterface{
         return doctor;
     }
 
+    // Updates the details of an existing doctor.
     @Override
     public void updateDoctor(Doctor doctor) throws SQLException {
         String sql = "UPDATE Doctor SET doctorName = ?, doctorAddress = ?, doctorMobile = ?, doctorEmail = ?, doctorPwd = ?, specialization = ? WHERE doctorID = ?";
@@ -63,6 +69,7 @@ public class DoctorDao implements DoctorDaoInterface{
         }
     }
 
+    // Retrieves a list of all doctors.
     @Override
     public List<Doctor> getAllDoctors() {
         List<Doctor> doctors = new ArrayList<>();
@@ -88,6 +95,7 @@ public class DoctorDao implements DoctorDaoInterface{
         return doctors;
     }
 
+    // Registers a new doctor in the database.
     @Override
     public void registerDoctor(Doctor doctor) throws SQLException {
         String query = "INSERT INTO Doctor (doctorName, doctorAddress, doctorMobile, doctorEmail, doctorPwd, specialization) VALUES (?, ?, ?, ?, ?, ?)";

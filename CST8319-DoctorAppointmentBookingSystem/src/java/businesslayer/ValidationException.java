@@ -9,19 +9,24 @@ package businesslayer;
  * @author fwu
  */
 public class ValidationException extends Exception {
+
+    // Constructs a new ValidationException with a default detail message.
     public ValidationException() {
-		super("Data not in valid format");
-	}
+        super("Data not in valid format");
+    }
 
-	public ValidationException(String message) {
-		super(message);
-	}
+    // Constructs a new ValidationException with the specified detail message.
+    public ValidationException(String message) {
+        super(message);
+    }
 
-	public ValidationException(String message, Throwable throwable) {
-		super(message, throwable);
-	}
+    // Constructs a new ValidationException with the specified detail message and cause.
+    public ValidationException(String message, Throwable throwable) {
+        super(message, throwable);
+    }
 
-	public ValidationException(Throwable throwable) {
-		super(throwable);
-	}
+    // Constructs a new ValidationException with the specified cause.
+    public ValidationException(Throwable throwable) {
+        super(throwable);
+    }
 }
