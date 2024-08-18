@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
+    <div class="header">
+        <h1>Appointment Booking System</h1>
+    </div>
     <div class="container">
         <h1>Login</h1>
         <form action="LoginServlet" method="post">
@@ -31,5 +34,4 @@
         <p>Don't have an account? <a href="register.jsp">Register here</a></p>
     </div>
 </body>
-
 </html>

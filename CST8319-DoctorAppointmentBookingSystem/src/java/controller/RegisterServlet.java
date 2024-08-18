@@ -7,6 +7,7 @@ package controller;
 import businesslayer.DoctorBusinessLogic;
 import businesslayer.PatientBusinessLogic;
 import businesslayer.Validation;
+import businesslayer.ValidationException;
 import model.Doctor;
 import model.Patient;
 
@@ -59,8 +60,16 @@ public class RegisterServlet extends HttpServlet {
                 patientBusinessLogic.registerPatient(patient);
             }
             response.sendRedirect("index.jsp"); // Redirect to login page after successful registration
+        } catch (ValidationException e) {
+            // Handle password validation errors
+            request.setAttribute("registerError", "Password validation failed: " + e.getMessage());
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        } catch (IllegalArgumentException e) {
+            // Handle invalid role errors
+            request.setAttribute("registerError", e.getMessage());
+            request.getRequestDispatcher("register.jsp").forward(request, response);
         } catch (Exception e) {
-            e.printStackTrace();
+            // Handle general errors
             request.setAttribute("registerError", "An error occurred while registering the profile. " + e.getMessage());
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }

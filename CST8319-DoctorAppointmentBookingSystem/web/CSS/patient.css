@@ -1,103 +1,117 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Aug 1, 2024, 2:35:31 PM
-    Author     : aaron
-*/
-/* patient.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
 }
 
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+body {
+    background-image: url('bg01.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-family: Arial, sans-serif;
+    color: #fff; /* Default text color to white */
 }
 
-h1 {
-    text-align: center;
-    color: #333;
+header {
+    position: fixed;
+    top: 20px; /* Space from the top */
+    left: 20px; /* Space from the left */
+    z-index: 1; /* Ensure header is above other content */
 }
 
-.buttons {
+header h1 {
+    font-size: 42px; /* Enlarged font size */
+    margin: 0;
+}
+
+nav.navigation {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: 80px; /* Space between header and navigation */
 }
 
-.button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    margin: 5px;
+.navigation a {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 12px 20px; /* Enlarged padding for larger buttons */
+    background-color: #007bff;
+    color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: 6px; /* Larger border-radius for buttons */
+    border: 2px solid #0056b3; /* More pronounced border */
+    font-size: 18px; /* Enlarged font size for buttons */
 }
 
-.button:hover {
-    background-color: #45a049;
+.navigation a:hover {
+    background-color: #0056b3;
+    border-color: #004494; /* Darker border on hover */
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 120px 20px 20px; /* Space from top (to account for the fixed header) */
+    min-height: 100vh; /* Full viewport height */
+    box-sizing: border-box;
 }
 
 h2 {
-    color: #333;
+    font-size: 36px; /* Enlarged font size for the heading */
+    color: #fff; /* White text to match the header */
+    margin-bottom: 20px; /* Space below heading */
 }
 
-.appointments-table {
+.appointments-table, .doctors-table {
     width: 100%;
+    max-width: 1000px; /* Maximum width for better readability */
     border-collapse: collapse;
-    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white background for the table */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow for framing */
 }
 
-.appointments-table th, .appointments-table td {
+.appointments-table th, .appointments-table td, .doctors-table th, .doctors-table td {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 12px; /* Enlarged padding for table cells */
     text-align: left;
 }
 
-.appointments-table th {
+.appointments-table th, .doctors-table th {
     background-color: #f2f2f2;
-    color: #333;
-}
-
-.appointments-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.appointments-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-.appointments-table .button {
-    padding: 5px 10px;
-    font-size: 14px;
-}
-
-.error-message {
-    color: red;
     font-weight: bold;
-    text-align: center;
+    color: #000; /* Black text for table headers */
 }
 
-.cancel-button {
-    background-color: #f44336; /* Red color */
-    color: white;
-    padding: 10px 20px;
-    margin: 5px;
+.appointments-table td, .doctors-table td {
+    background-color: #fff; /* White background for table cells */
+    color: #000; /* Black text for table content */
+}
+
+.appointments-table .button, .doctors-table .button {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 10px 15px; /* Enlarged padding for action buttons */
+    background-color: #007bff;
+    color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border-radius: 6px; /* Larger border-radius for buttons */
+    border: 2px solid #0056b3; /* More pronounced border */
+    font-size: 16px; /* Enlarged font size for action buttons */
 }
 
-.cancel-button:hover {
-    background-color: #c62828;
+.appointments-table .button.cancel-button {
+    background-color: #dc3545;
+    border-color: #c82333; /* Pronounced border for cancel buttons */
 }
 
+.appointments-table .button:hover, .doctors-table .button:hover {
+    background-color: #0056b3;
+    border-color: #004494; /* Darker border on hover */
+}
+
+.appointments-table .button.cancel-button:hover {
+    background-color: #c82333;
+    border-color: #b02a37; /* Darker border on hover */
+}
