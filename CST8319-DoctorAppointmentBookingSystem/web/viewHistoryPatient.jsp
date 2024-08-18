@@ -23,18 +23,17 @@
     <link rel="stylesheet" href="CSS/patient.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Appointment History for <%= session.getAttribute("patientName") %></h1>
-        
-        <div class="buttons">
+    <header>
+        <h1>Welcome, <%= session.getAttribute("patientName") %></h1>
+    </header>
+    <nav class="navigation">
             <a href="viewProfilePatient.jsp" class="button">View Profile</a>
             <a href="bookAppointment.jsp" class="button">Book Appointment</a>
             <a href="patient.jsp" class="button">Back to Dashboard</a>
             <a href="LogoutServlet" class="button">Logout</a>
-            
-        </div>
-        
-        <h2>Past Appointments</h2>
+    </nav>
+    <main>
+        <h2>Past Appointments</h2><br><br>          
         <table class="appointments-table">
             <thead>
                 <tr>
@@ -90,6 +89,6 @@
                 %>
             </tbody>
         </table>
-    </div>
+    </main>
 </body>
 </html>

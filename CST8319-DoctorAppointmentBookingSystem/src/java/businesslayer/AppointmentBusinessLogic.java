@@ -10,17 +10,20 @@ import java.sql.SQLException;
 import java.sql.Date;
 import java.sql.Time;
 
+/**
+ * Handles business logic related to appointments.
+ */
 public class AppointmentBusinessLogic {
 
     private AppointmentDao appointmentDao = new AppointmentDao();
 
-    // Method to validate note input
+    // Validates the note input to ensure it is not null or empty.
     public boolean validateNoteInput(String note) {
         // Basic validation: ensure note is not null or empty
         return note != null && !note.trim().isEmpty();
     }
 
-    // Method to add note to appointment
+    // Adds a note to an appointment if the note input is valid.
     public void addNoteToAppointment(int appointmentID, String note) throws SQLException {
         if (validateNoteInput(note)) {
             appointmentDao.addNoteToAppointment(appointmentID, note);
@@ -28,7 +31,7 @@ public class AppointmentBusinessLogic {
             throw new IllegalArgumentException("Invalid note input");
         }
     }
-    // Method to validate appointment inputs
+    // Validates appointment details to ensure they are correct and the date/time is in the future.
     public boolean validateAppointmentInputs(int doctorID, int patientID, Date appointmentDate, Time appointmentTime, String reason) {
         // Basic validation: ensure inputs are not null and date/time is in the future
         if (doctorID <= 0 || patientID <= 0 || appointmentDate == null || appointmentTime == null || reason == null || reason.trim().isEmpty()) {
@@ -46,7 +49,7 @@ public class AppointmentBusinessLogic {
         return true;
     }
 
-    // Method to book appointment
+    // Books a new appointment if the details are valid.
     public void bookAppointment(int doctorID, int patientID, Date appointmentDate, Time appointmentTime, String reason) throws SQLException {
         if (validateAppointmentInputs(doctorID, patientID, appointmentDate, appointmentTime, reason)) {
             Appointment appointment = new Appointment();
@@ -61,7 +64,7 @@ public class AppointmentBusinessLogic {
             throw new IllegalArgumentException("Invalid appointment details");
         }
     }
-    // Method to cancel an appointment
+    // Cancels an appointment by its ID.
     public void cancelAppointment(int appointmentID) throws SQLException {
         if (appointmentID <= 0) {
             throw new IllegalArgumentException("Invalid appointment ID");
@@ -69,6 +72,8 @@ public class AppointmentBusinessLogic {
         
         appointmentDao.deleteAppointment(appointmentID);
     }
+    
+    // Updates the details of an existing appointment.
     public void updateAppointment(int appointmentID, Date appointmentDate, Time appointmentTime, String reason) throws SQLException {
         // Fetch the existing appointment
         Appointment appointment = appointmentDao.getAppointmentByID(appointmentID);
@@ -94,7 +99,7 @@ public class AppointmentBusinessLogic {
         appointmentDao.updateAppointment(appointment);
     }
 
-   
+    // Validates the appointment date and time to ensure they are in the future.
     private void validateAppointmentDateTime(Date appointmentDate, Time appointmentTime) {
         // Example validation: Check if the date and time are in the future
         if (appointmentDate.before(new Date(System.currentTimeMillis())) ||

@@ -1,4 +1,5 @@
 <%-- 
+
     Document   : login
     Created on : Jul 31, 2024, 7:16:17 PM
     Author     : aaron
@@ -14,6 +15,9 @@
     <link rel="stylesheet" href="CSS/index.css">
 </head>
 <body>
+    <div class="header">
+        <h1>Appointment Booking System</h1>
+    </div>
     <div class="container">
         <h1>Login</h1>
         <form action="LoginServlet" method="post">

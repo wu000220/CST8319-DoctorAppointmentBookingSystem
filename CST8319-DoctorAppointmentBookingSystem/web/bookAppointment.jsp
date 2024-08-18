@@ -1,8 +1,4 @@
-<%-- 
-    Document   : bookAppointment
-    Created on : Aug 1, 2024, 3:33:26 PM
-    Author     : aaron
---%>
+
 
 <%@ page import="dataaccesslayer.DoctorDao" %>
 <%@ page import="model.Doctor" %>
@@ -17,16 +13,17 @@
     <link rel="stylesheet" href="CSS/patient.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Book an Appointment</h1>
-        <div class="buttons">
-            <a href="viewProfilePatient.jsp" class="button">View Profile</a>
-            <a href="bookAppointment.jsp" class="button">Book Appointment</a>
-            <a href="patient.jsp" class="button">Back to Dashboard</a>
-            <a href="LogoutServlet" class="button">Logout</a>
-            
-        </div>
-
+    <header>
+        <h1>Welcome, <%= session.getAttribute("patientName") %></h1>
+    </header>
+    <nav class="navigation">
+        <a href="viewProfilePatient.jsp" class="button">View Profile</a>
+        <a href="bookAppointment.jsp" class="button">Book Appointment</a>
+        <a href="patient.jsp" class="button">Back to Dashboard</a>
+        <a href="LogoutServlet" class="button">Logout</a>
+    </nav>
+    <main>
+        <h2>Book an Appointment</h2><br><br> 
         <table class="doctors-table">
             <thead>
                 <tr>
@@ -77,6 +74,6 @@
                 %>
             </tbody>
         </table>
-    </div>
+    </main>
 </body>
 </html>

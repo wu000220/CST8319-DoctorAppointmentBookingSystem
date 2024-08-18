@@ -16,8 +16,8 @@ public class DataSource {
 
     // JDBC URL, username, and password for connecting to the database
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/bookingsystem";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "yA032143";
+    private static final String USERNAME = "CST8288";
+    private static final String PASSWORD = "123456";
 
     // Private constructor to prevent instantiation
     private DataSource() { }

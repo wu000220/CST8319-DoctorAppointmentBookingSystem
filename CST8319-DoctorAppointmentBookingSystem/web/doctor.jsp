@@ -1,8 +1,4 @@
-<%-- 
-    Document   : doctor
-    Created on : Jul 31, 2024, 7:44:43 PM
-    Author     : aaron
---%>
+
 
 <%@ page import="dataaccesslayer.AppointmentDao" %>
 <%@ page import="java.util.List" %>
@@ -17,17 +13,18 @@
     <link rel="stylesheet" href="CSS/doctor.css">
     <script src="JS/doctor.js" defer></script>
 </head>
-<body>
-    <div class="container">
+<body>   
+    <header>
         <h1>Welcome, <%= session.getAttribute("doctorName") %></h1>
-
-        <div class="buttons">
-            <a href="viewProfileDoctor.jsp" class="button">View Profile</a>
-            <a href="viewHistoryDoctor.jsp" class="button">View Appointment History</a>
-            <a href="LogoutServlet" class="button">Logout</a>
-        </div>
-
-        <h2>Upcoming Appointments</h2>
+    </header>
+    <nav class="navigation">
+        <a href="viewProfileDoctor.jsp" class="button">View Profile</a>
+        <a href="viewHistoryDoctor.jsp" class="button">View Appointment History</a>
+        <a href="LogoutServlet" class="button">Logout</a>
+    </nav>
+    
+    <main>
+        <h2>Upcoming Appointments</h2><br><br>
         <table class="appointments-table">
             <thead>
                 <tr>
@@ -43,7 +40,6 @@
             <tbody>
                 <% 
                     try {
-                        // Fetch upcoming appointments from the database
                         AppointmentDao appointmentDao = new AppointmentDao();
                         Integer doctorID = (Integer) session.getAttribute("doctorID");
 
@@ -77,7 +73,7 @@
                 <% 
                         }
                     } catch (Exception e) {
-                        e.printStackTrace(); // Print stack trace to server logs
+                        e.printStackTrace();
                 %>
                 <tr>
                     <td colspan="6">Error fetching appointments: <%= e.getMessage() %></td>
@@ -94,7 +90,7 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Add Note</h2>
-            <form id="noteForm" action="addNoteServlet" method="post">
+            <form id="noteForm" action="AddNoteServlet" method="post" class="profile-form">
                 <input type="hidden" id="appointmentID" name="appointmentID">
                 <div class="form-group">
                     <label for="note">Note:</label>
@@ -103,6 +99,6 @@
                 <button type="submit">Save Note</button>
             </form>
         </div>
-    </div>
+    </main>
 </body>
 </html>

@@ -4,7 +4,13 @@
  */
 package model;
 
+/**
+ * The Doctor class represents a doctor in the system.
+ * It contains details about the doctor such as their name, contact information,
+ * credentials, and specialization.
+ */
 public class Doctor {
+
     private int doctorID;
     private String doctorName;
     private String doctorAddress;
@@ -68,6 +74,8 @@ public class Doctor {
 
     public void setSpecialization(String specialization) {
         this.specialization = specialization;
+
+
     }
     
 }
