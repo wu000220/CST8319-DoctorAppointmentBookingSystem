@@ -17,16 +17,16 @@
     <link rel="stylesheet" href="CSS/doctor.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Appointment History for <%= session.getAttribute("doctorName") %></h1>
-        
-        <div class="buttons">
-            <a href="viewProfileDoctor.jsp" class="button">View Profile</a>
-            <a href="doctor.jsp" class="button">Back to Dashboard</a>
-            <a href="LogoutServlet" class="button">Logout</a>
-        </div>
-
-        <h2>Past Appointments</h2>
+    <header>
+        <h1>Welcome, <%= session.getAttribute("doctorName") %></h1>
+    </header>
+    <nav class="navigation">
+        <a href="viewProfileDoctor.jsp" class="button">View Profile</a>
+        <a href="doctor.jsp" class="button">Back to Dashboard</a>
+        <a href="LogoutServlet" class="button">Logout</a>
+    </nav>
+    <main>
+        <h2>Past Appointments</h2><br><br> 
         <table class="appointments-table">
             <thead>
                 <tr>
@@ -77,6 +77,6 @@
                 %>
             </tbody>
         </table>
-    </div>
+    </main>
 </body>
 </html>

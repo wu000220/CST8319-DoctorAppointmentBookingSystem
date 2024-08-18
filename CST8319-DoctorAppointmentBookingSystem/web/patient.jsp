@@ -1,19 +1,6 @@
-<%-- 
-    Document   : patient
-    Created on : Jul 31, 2024, 8:31:56 PM
-    Author     : aaron
---%>
-
-<%-- 
-    Document   : patient
-    Created on : Jul 31, 2024, 8:31:56 PM
-    Author     : aaron
---%>
-
-<%@ page import="dataaccesslayer.AppointmentDao" %>
-<%@ page import="java.util.List" %>
-<%@ page import="model.Appointment" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="model.Appointment"%>
+<%@page import="java.util.List"%>
+<%@page import="dataaccesslayer.AppointmentDao"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,17 +10,17 @@
     <link rel="stylesheet" href="CSS/patient.css">
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>Welcome, <%= session.getAttribute("patientName") %></h1>
-
-        <div class="buttons">
-            <a href="viewProfilePatient.jsp" class="button">View Profile</a>
-            <a href="bookAppointment.jsp" class="button">Book Appointment</a>
-            <a href="viewHistoryPatient.jsp" class="button">View Appointment History</a>
-            <a href="LogoutServlet" class="button">Logout</a>
-        </div>
-
-        <h2>Upcoming Appointments</h2>
+    </header>
+    <nav class="navigation">
+        <a href="viewProfilePatient.jsp" class="button">View Profile</a>
+        <a href="bookAppointment.jsp" class="button">Book Appointment</a>
+        <a href="viewHistoryPatient.jsp" class="button">View Appointment History</a>
+        <a href="LogoutServlet" class="button">Logout</a>
+    </nav>
+    <main>
+        <h2>Upcoming Appointments</h2><br><br>
         <table class="appointments-table">
             <thead>
                 <tr>
@@ -49,7 +36,6 @@
             <tbody>
                 <% 
                     try {
-                        // Fetch upcoming appointments from the database
                         AppointmentDao appointmentDao = new AppointmentDao();
                         Integer patientID = (Integer) session.getAttribute("patientID");
 
@@ -94,6 +80,6 @@
                 %>
             </tbody>
         </table>
-    </div>
+    </main>
 </body>
 </html>

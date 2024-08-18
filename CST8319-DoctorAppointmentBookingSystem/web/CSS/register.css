@@ -2,24 +2,28 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
 */
-/* 
-    Created on : Jul 31, 2024, 7:31:59 PM
-    Author     : aaron
-*/
+
 /* Basic Reset */
-* {
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
+/* index.css */
 body {
+    background-image: url('bg01.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    margin: 0;
+    padding: 0;
 }
 
 .container {
