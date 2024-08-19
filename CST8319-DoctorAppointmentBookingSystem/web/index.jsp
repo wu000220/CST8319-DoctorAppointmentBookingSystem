@@ -20,6 +20,12 @@
     </div>
     <div class="container">
         <h1>Login</h1>
+        
+        <!-- Check if there is a login error and display it -->
+        <c:if test="${not empty loginError}">
+            <div class="error-message">${loginError}</div>
+        </c:if>
+        
         <form action="LoginServlet" method="post">
             <div class="form-group">
                 <label for="email">Email:</label>

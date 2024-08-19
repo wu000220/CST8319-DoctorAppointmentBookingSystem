@@ -2,6 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+/*
+ * Servlet implementation class UpdatePatientServlet
+ * This servlet handles updating a patient's profile. It processes form submissions 
+ * for updating patient details and updates the session with the new information.
+ */
+
 package controller;
 
 import businesslayer.PatientBusinessLogic;
@@ -18,18 +24,23 @@ import java.io.IOException;
 public class UpdatePatientServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    // Instance of the business logic class for patient management
     private PatientBusinessLogic patientBusinessLogic = new PatientBusinessLogic();
 
+    // Handles POST requests for updating a patient's profile
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Retrieve the current session and check if the patient is logged in
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
 
+        // Redirect to login page if no patient is found in the session
         if (patient == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
+        // Retrieve updated patient details from request parameters
         String patientName = request.getParameter("patientName");
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
@@ -37,7 +48,7 @@ public class UpdatePatientServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try {
-            // Use the business logic class to update the patient's profile
+            // Update the patient's profile using the business logic class
             patientBusinessLogic.updatePatient(
                 patient.getPatientID(), 
                 patientName, 
@@ -55,14 +66,15 @@ public class UpdatePatientServlet extends HttpServlet {
             patient.setPatientPwd(password);
             session.setAttribute("patient", patient);
 
+            // Redirect to patient dashboard after successful update
             response.sendRedirect("patient.jsp");
         } catch (IllegalArgumentException e) {
-            // Handle validation errors
+            // Handle validation errors and display appropriate message
             e.printStackTrace();
             request.setAttribute("updateError", "Error updating profile: " + e.getMessage());
             request.getRequestDispatcher("viewProfilePatient.jsp").forward(request, response);
         } catch (Exception e) {
-            // Handle other exceptions
+            // Handle general exceptions and display appropriate message
             e.printStackTrace();
             request.setAttribute("updateError", "An error occurred while updating the profile.");
             request.getRequestDispatcher("viewProfilePatient.jsp").forward(request, response);
